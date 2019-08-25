@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+
+    <!-- Load the latest version of TensorFlow.js -->
+    <script src="https://unpkg.com/@tensorflow/tfjs"></script>
+    <script src="https://unpkg.com/@tensorflow-models/mobilenet"></script>
+    <script src="https://unpkg.com/@tensorflow-models/knn-classifier"></script>
+    <title>El Classifo</title>
+  </head>
+  <body>
+    <div id="console"></div>
+
+    <!-- 
+    Add an image that we will use to test 
+    <img id="img" crossOrigin src="https://i.imgur.com/JlUvsxa.jpg" width=227 height=227/>
+    -->
+
+    <div class="container">
+
+      <h1>Take a picture</h1>
+      <video autoplay playsinline muted id="webcam" width="224" height="224"></video>
+
+      <h5>or</h5>
+
+      <h1>Upload an Image</h1>
+      <%= typeof msg != 'undefined' ? msg : '' %>
+      <form action="/upload" method='POST', enctype="multipart/form-data">
+          <div class="file-field input-field">
+            <div class="btn grey">
+              <span>File</span>
+              <input name='myImage' type="file">
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text">
+            </div>
+          </div>
+          <button type="submit" class='btn'>Submit</button>
+        </form>
+       
+    </div>
+
+    <script 
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous">
+    </script>
+
+    <script 
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js">
+    </script>
+    
+    <!-- Load index.js after the content of the page -->
+    <script src="index.js"></script>
+  </body>
+</html>
