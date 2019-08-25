@@ -33,42 +33,51 @@ async function app() {
     // Load the model.
     net = await mobilenet.load();
     console.log('Sucessfully loaded model');
+
+    const imgEl = document.getElementById('img');
+    const result = await net.classify(imgEl);
+
+    var prediction = document.createElement("h1");
+    prediction.innerHTML = result[0].className;       
+    var objTo = document.getElementById('container');            
+    objTo.appendChild(prediction);  
+    console.log(result)
   
-    await setupWebcam();
+    // await setupWebcam();
   
-    // Reads an image from the webcam and associates it with a specific class
-    // index.
-    const addExample = classId => {
-      // Get the intermediate activation of MobileNet 'conv_preds' and pass that
-      // to the KNN classifier.
-      const activation = net.infer(webcamElement, 'conv_preds');
+    // // Reads an image from the webcam and associates it with a specific class
+    // // index.
+    // const addExample = classId => {
+    //   // Get the intermediate activation of MobileNet 'conv_preds' and pass that
+    //   // to the KNN classifier.
+    //   const activation = net.infer(webcamElement, 'conv_preds');
   
-      // Pass the intermediate activation to the classifier.
-      classifier.addExample(activation, classId);
-    };
+    //   // Pass the intermediate activation to the classifier.
+    //   classifier.addExample(activation, classId);
+    // };
   
-    // When clicking a button, add an example for that class.
-    document.getElementById('class-a').addEventListener('click', () => addExample(0));
-    document.getElementById('class-b').addEventListener('click', () => addExample(1));
-    document.getElementById('class-c').addEventListener('click', () => addExample(2));
-    document.getElementById('class-d').addEventListener('click', () => addExample(3));
+    // // When clicking a button, add an example for that class.
+    // document.getElementById('class-a').addEventListener('click', () => addExample(0));
+    // document.getElementById('class-b').addEventListener('click', () => addExample(1));
+    // document.getElementById('class-c').addEventListener('click', () => addExample(2));
+    // document.getElementById('class-d').addEventListener('click', () => addExample(3));
   
-    while (true) {
-      if (classifier.getNumClasses() > 0) {
-        // Get the activation from mobilenet from the webcam.
-        const activation = net.infer(webcamElement, 'conv_preds');
-        // Get the most likely class and confidences from the classifier module.
-        const result = await classifier.predictClass(activation);
+    // while (true) {
+    //   if (classifier.getNumClasses() > 0) {
+    //     // Get the activation from mobilenet from the webcam.
+    //     const activation = net.infer(webcamElement, 'conv_preds');
+    //     // Get the most likely class and confidences from the classifier module.
+    //     const result = await classifier.predictClass(activation);
   
-        const classes = ['A', 'B', 'C', '-'];
-        document.getElementById('console').innerText = `
-          prediction: ${classes[result.classIndex]}\n
-          probability: ${result.confidences[result.classIndex]}
-        `;
-      }
+    //     const classes = ['A', 'B', 'C', '-'];
+    //     document.getElementById('console').innerText = `
+    //       prediction: ${classes[result.classIndex]}\n
+    //       probability: ${result.confidences[result.classIndex]}
+    //     `;
+    //   }
   
-      await tf.nextFrame();
-    }
+    //   await tf.nextFrame();
+    // }
   }
 
 app();

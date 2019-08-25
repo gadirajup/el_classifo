@@ -3,9 +3,8 @@ const multer = require('multer')
 const ejs = require('ejs')
 const path = require('path')
 
-const app = express()
-const port = 3000
-
+// Setup Multer
+// Setup Multer Disk Storage - Where to save uploads
 const storage = multer.diskStorage({
     destination: './public/uploads',
     filename: function(req, file, cb) {
@@ -33,6 +32,10 @@ function checkFileType(file, cb) {
     }
 }
 
+// Setup express
+const app = express()
+const port = 3000
+
 app.set('view engine', 'ejs');
 
 app.use(express.static('./public'));
@@ -51,6 +54,7 @@ app.post('/', (req, res) => {
                     msg: "Error: No File Selected"
                 })
             } else {
+                // Upload Success
                 res.render('index', {
                     msg: "File Uploaded",
                     file: `uploads/${req.file.filename}`
