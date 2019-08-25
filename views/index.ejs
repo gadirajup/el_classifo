@@ -7,29 +7,20 @@
     />
 
     <!-- Load the latest version of TensorFlow.js -->
-    <script src="https://unpkg.com/@tensorflow/tfjs"></script>
-    <script src="https://unpkg.com/@tensorflow-models/mobilenet"></script>
-    <script src="https://unpkg.com/@tensorflow-models/knn-classifier"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.dom.min.js"></script>
+    <script src="https://unpkg.com/ml5@0.3.1/dist/ml5.min.js"></script>
 
     <title>El Classifo</title>
   </head>
   <body>
     <div id="container" class="container">
 
-      <h1>Take a picture</h1>
+      <h1>El Classifo</h1>
 
-      <video
-        autoplay
-        playsinline
-        muted
-        id="webcam"
-        width="224"
-        height="224"
-      ></video>
+      <h5>Upload an image to see what it is</h5>
 
-      <h5>or</h5>
-
-      <h1>Upload an Image</h1>
+      <br>
 
       <!-- Show Error with ejs -->
       <%= typeof msg != 'undefined' ? msg : '' %>

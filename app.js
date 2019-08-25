@@ -4,7 +4,6 @@ const ejs = require('ejs')
 const path = require('path')
 
 // Setup Multer
-// Setup Multer Disk Storage - Where to save uploads
 const storage = multer.diskStorage({
     destination: './public/uploads',
     filename: function(req, file, cb) {
@@ -36,6 +35,7 @@ function checkFileType(file, cb) {
 const app = express()
 const port = 3000
 
+// Setup EJS
 app.set('view engine', 'ejs');
 
 app.use(express.static('./public'));
@@ -58,7 +58,7 @@ app.post('/', (req, res) => {
                 res.render('index', {
                     msg: "File Uploaded",
                     file: `uploads/${req.file.filename}`
-                })
+                });
             }
         }
     })
@@ -71,3 +71,4 @@ app.use(function(req, res) {
 })
 
 app.listen(port, () => console.log(`App listening on port ${port}!`))
+
