@@ -33,7 +33,7 @@ function checkFileType(file, cb) {
 
 // Setup express
 const app = express()
-const port = 3000
+const port = process.env.PORT || 5000
 
 // Setup EJS
 app.set('view engine', 'ejs');
